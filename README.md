@@ -1,0 +1,2 @@
+# EasyChat
+ A little plugin
