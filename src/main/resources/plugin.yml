@@ -1,0 +1,12 @@
+main: net.liangcha.EasyChat.Main
+name: EasyChat
+version: 1.0.3-p2
+authors: [liangcha]
+website: http://afdian.net/@liangcha_awa
+api-version: 1.16
+commands:
+  mute:
+    description: Mute Players~
+  unmute:
+      description: Cancel Mute Players~
+#感谢使用!!!

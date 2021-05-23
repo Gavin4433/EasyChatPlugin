@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+	id "de.undercouch.download" version "4.1.1"
+}
+
+group 'com.yourname.modid'
+version '1.0.2-release'
+
+repositories {
+	mavenLocal()
+    mavenCentral()
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"
+    }
+}
+
+dependencies {
+	implementation 'org.jetbrains:annotations:20.1.0'
+    compileOnly "org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT"
+	compileOnly "org.spigotmc:minecraft-server:1.16.5-SNAPSHOT"
+	compileOnly "org.spigotmc:spigot:1.16.5-R0.1-SNAPSHOT"
+}
+
+jar {
+    archiveFileName = 'EasyChat-'+version+'.jar'
+}
+
+task buildLatestSpigot(type: de.undercouch.gradle.tasks.download.Download)  {
+	src 'https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar'
+    dest 'build/btmp/BuildTools.jar'
+	doLast {
+		javaexec {
+			main = "-jar"
+			args = [ "BuildTools.jar", "--rev", "1.16.4" ]
+			workingDir = "build/btmp"
+		}
+		copy {
+			from file('build/btmp/spigot-1.16.4.jar')
+			into file('run/')
+		}
+		delete files('build/btmp')
+	}
+}
+
+task runSpigotServer (dependsOn: build) {
+	doLast {
+		copy {
+			from file('build/libs/plugin.jar')
+			into file('run/plugins/')
+		}
+		javaexec {
+			main = "-jar"
+			args = [ "spigot-1.16.4.jar" ]
+			workingDir = "run/"
+		}
+	}
+}
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+

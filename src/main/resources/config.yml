@@ -1,0 +1,13 @@
+#脏话屏蔽配置
+fucks:
+  - "臭弟弟"
+  - "fuck"
+#说话CD(单位:秒)
+chat_cd: 3
+mute_players:
+  - "song"
+#作者:liangcha_awa
+#bilibili:@liang_awa
+#西瓜视频:@liangQAQ
+#爱发电:http://afdian.net/@liangcha_awa
+#MCBBS:liangcha_awa
