@@ -1,9 +1,4 @@
 # EasyChat
- A little plugin!
-
-What?
-
-Just kidding....
 
 #Q&A
 
